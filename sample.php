@@ -28,17 +28,8 @@ function getDatePeriodFromDateRangeString(
         return null;
     }
 
-    // 日付の差を取得
-    $interval = $start->diff($end);
-
-    // DateTimeImmutable::diffの結果がfalseになる場合があるようなので、DateIntervalでなければ失敗としてnullを返す
-    if (!($interval instanceof \DateInterval)) {
-        // 日付の期間を取得
-        return null;
-    }
-
     // 日付範囲オブジェクトを返す
-    return new \DatePeriod($start, $interval, $end);
+    return new \DatePeriod($start, new \DateInterval('P1D'), $end);
 };
 
 $date_period1 = getDatePeriodFromDateRangeString('2023年1月1日〜2023年12月31日');
